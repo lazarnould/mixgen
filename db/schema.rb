@@ -21,12 +21,9 @@ ActiveRecord::Schema.define(version: 20170219184943) do
     t.string   "last_name"
     t.date     "birthdate"
     t.text     "description"
-    t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
-
-  add_index "children", ["user_id"], name: "index_children_on_user_id", using: :btree
 
   create_table "homes", force: :cascade do |t|
     t.string   "name"
@@ -50,7 +47,6 @@ ActiveRecord::Schema.define(version: 20170219184943) do
   create_table "reviews", force: :cascade do |t|
     t.text     "content"
     t.integer  "rating"
-    t.integer  "user_id"
     t.integer  "child_id"
     t.integer  "home_id"
     t.datetime "created_at", null: false
@@ -59,24 +55,7 @@ ActiveRecord::Schema.define(version: 20170219184943) do
 
   add_index "reviews", ["child_id"], name: "index_reviews_on_child_id", using: :btree
   add_index "reviews", ["home_id"], name: "index_reviews_on_home_id", using: :btree
-  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
 
-  create_table "users", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "email"
-    t.integer  "phone_number"
-    t.string   "phone_prefix"
-    t.integer  "home_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
-
-  add_index "users", ["home_id"], name: "index_users_on_home_id", using: :btree
-
-  add_foreign_key "children", "users"
   add_foreign_key "reviews", "children"
   add_foreign_key "reviews", "homes"
-  add_foreign_key "reviews", "users"
-  add_foreign_key "users", "homes"
 end
