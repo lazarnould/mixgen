@@ -3,6 +3,7 @@ class CreateReviews < ActiveRecord::Migration
     create_table :reviews do |t|
       t.text :content
       t.integer :rating
+      t.references :user, index: true, foreign_key: true
       t.references :child, index: true, foreign_key: true
       t.references :home, index: true, foreign_key: true
 

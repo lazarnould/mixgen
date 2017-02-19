@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
+  get 'profiles/new'
+
+  get 'profiles/create'
+
+  get 'profiles/edit'
+
+  get 'profiles/update'
+
+  get 'profiles/show'
+
+  get 'profiles/delete'
+
+  devise_for :users
   get 'reviews/new'
 
   get 'reviews/create'
